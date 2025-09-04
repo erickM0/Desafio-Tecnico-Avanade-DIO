@@ -1,15 +1,58 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.VisualBasic;
+using StockService.Domain.Entities;
+using StockService.Domain.Intrfaces;
 
 namespace StockService.Infra;
 
-public class DBContext : DbContext
+public class AppDbContext : DbContext
 {
-    private readonly IConfiguration _configurationAppSettings;
-    public DBContext(IConfiguration configurationAppSettings)
+
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
     {
-        _configurationAppSettings = configurationAppSettings;
     }
+
+    public DbSet<Product> Products { get; set; }
+
+
+    public override int SaveChanges()
+    {
+        OnBeforeSavig();
+        return base.SaveChanges();
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        OnBeforeSavig();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void OnBeforeSavig()
+    {
+        var entries = ChangeTracker.Entries();
+        var utcNow = DateTime.UtcNow;
+
+        foreach (var entry in entries)
+        {
+            if (entry.Entity is IAuditable auditableEntity)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    auditableEntity.CreatedAt = utcNow;
+                    auditableEntity.LastModifiedAt = utcNow;
+                }
+
+                else if (entry.State == EntityState.Modified)
+                {
+                    auditableEntity.LastModifiedAt = utcNow;
+                }
+
+            }
+
+        }
+    }
+
 }
