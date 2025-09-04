@@ -1,6 +1,0 @@
-@SalesMS_HostAddress = http://localhost:5280
-
-GET {{SalesMS_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
