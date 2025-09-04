@@ -1,19 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace StockService.Domain;
 
-public class Product
+using StockService.Domain.Intrfaces;
+
+namespace StockService.Domain.Entities;
+
+public class Product : IAuditable 
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; } = default;
+
+    [Required]
+    [StringLength(200)]
     public required string Name { get; set; }
+    public DateTime CreatedAt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    [Required]
+    [Column(TypeName = "bit")]
     private bool Active { get; set; } = true;
 
-    private DateTime CratedAt { get; set; }
-    private DateTime LastModifiedAt { get; set; }
-    
+    [Required]
+    [Column(TypeName = "datetime2")]
+    public DateTime CratedAt { get; set; }
 
- 
-}
+    [Required]
+    [Column(TypeName = "datetime2")]
+    public DateTime LastModifiedAt { get; set; }
+   }
