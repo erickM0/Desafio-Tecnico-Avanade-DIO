@@ -1,15 +1,13 @@
-using StockService.Infra;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("SqlServer");
 
 
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<StockDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
+
 
 var app = builder.Build();
 

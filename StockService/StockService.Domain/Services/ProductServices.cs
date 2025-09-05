@@ -2,10 +2,12 @@ namespace StockService.Domain.Services;
 
 public class ProductServices
 {
-    private readonly DbContext _productsDbContext;
-    public ProductServices(DbContext dbContext)
+    private readonly  IProductDataAccess _productDataAccess;
+
+
+    public ProductServices(IProductDataAccess productDataAccess)
     {
-        _productsDbContext = dbContext;
+        _productDataAccess = productDataAccess;
     }
 
     public  async Task<List<Product>> ListProducts(int? page)
