@@ -8,16 +8,15 @@ using StockService.Domain.Interfaces;
 
 namespace StockService.Infra;
 
-public class AppDbContext : DbContext
+public class StockDbContext : DbContext
 {
 
-    public AppDbContext(DbContextOptions<AppDbContext> options)
+    public StockDbContext(DbContextOptions<StockDbContext> options)
         : base(options)
     {
     }
 
     public DbSet<Product> Products { get; set; }
-
     public DbSet<StockMovement> StockMovements {get; set; }
 
 
