@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
 using StockService.Domain.Entities;
-using StockService.Domain.Intrfaces;
+using StockService.Domain.Interfaces;
+
 
 namespace StockService.Infra;
 
@@ -16,6 +17,8 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Product> Products { get; set; }
+
+    public DbSet<StockMovement> StockMovements {get; set; }
 
 
     public override int SaveChanges()
@@ -37,7 +40,7 @@ public class AppDbContext : DbContext
 
         foreach (var entry in entries)
         {
-            if (entry.Entity is IAuditable auditableEntity)
+            if (entry.Entity is IAuditableModified auditableEntity)
             {
                 if (entry.State == EntityState.Added)
                 {

@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-using StockService.Domain.Intrfaces;
+using StockService.Domain.Interfaces;
 
 namespace StockService.Domain.Entities;
 
-public class Product : IAuditable 
+public class Product : IAuditableModified
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
