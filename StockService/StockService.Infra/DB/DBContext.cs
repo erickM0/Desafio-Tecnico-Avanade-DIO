@@ -40,20 +40,26 @@ public class AppDbContext : DbContext
 
         foreach (var entry in entries)
         {
-            if (entry.Entity is IAuditableModified auditableEntity)
+
+            if (entry.Entity is IAuditableModified modifiable)
             {
                 if (entry.State == EntityState.Added)
                 {
-                    auditableEntity.CreatedAt = utcNow;
-                    auditableEntity.LastModifiedAt = utcNow;
+                    modifiable.CreatedAt = utcNow;
+                    modifiable.LastModifiedAt = utcNow;
                 }
 
                 else if (entry.State == EntityState.Modified)
                 {
-                    auditableEntity.LastModifiedAt = utcNow;
+                    modifiable.LastModifiedAt = utcNow;
                 }
 
             }
+            else if (entry.Entity is IAuditable auditable && entry.State == EntityState.Added)
+            {
+                auditable.CreatedAt = utcNow;
+            }
+            
 
         }
     }

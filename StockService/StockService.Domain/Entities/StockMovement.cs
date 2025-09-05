@@ -18,5 +18,5 @@ public class StockMovement : IAuditable
     public DateTime CreatedAt { get; set; }
     [Required]
     public MovementTypes MovementType { get; set; }
-    public string Observations { get; set; } 
+    public string? Observations { get; set; } = null;
 }
