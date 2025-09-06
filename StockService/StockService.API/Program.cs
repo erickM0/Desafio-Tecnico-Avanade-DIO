@@ -29,12 +29,12 @@ if (app.Environment.IsDevelopment())
 
 
 
-app.MapGet("/teste", () =>
+app.MapGet("/products", async (ProductServices productServices) =>
 {
-    var obj = "teste ok";
-    return obj;
+    var products = await productServices.GetProducts(1);
+    return Results.Ok(products);
 })
-.WithName("teste");
+.WithName("products");
 
 app.Run();
 
