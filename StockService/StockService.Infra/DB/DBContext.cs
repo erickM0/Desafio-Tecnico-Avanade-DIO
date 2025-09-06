@@ -1,12 +1,9 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.VisualBasic;
+﻿using StockService.Domain.Interfaces;
 using StockService.Domain.Entities;
-using StockService.Domain.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-
-namespace StockService.Infra;
+namespace StockService.Infra.DB;
 
 public class StockDbContext : DbContext
 {
@@ -17,7 +14,7 @@ public class StockDbContext : DbContext
     }
 
     public DbSet<Product> Products { get; set; }
-    public DbSet<StockMovement> StockMovements {get; set; }
+    public DbSet<StockMovement> StockMovements { get; set; }
 
 
     public override int SaveChanges()
@@ -58,7 +55,7 @@ public class StockDbContext : DbContext
             {
                 auditable.CreatedAt = utcNow;
             }
-            
+
 
         }
     }
