@@ -1,4 +1,5 @@
 using StockService.Domain.Entities;
+
 namespace StockService.Domain.Interfaces;
 
 public interface IProductDataAccess
@@ -6,5 +7,6 @@ public interface IProductDataAccess
     Task<Product?> GetBySku(string sku);
     Task<List<Product>> GetList(int? page);
     Task<bool> Create(Product product);
-    Task<bool> Update(Product product);  
+    Task<bool> Update(Product product);
+    Task<bool> Delete(int id);  
 }
