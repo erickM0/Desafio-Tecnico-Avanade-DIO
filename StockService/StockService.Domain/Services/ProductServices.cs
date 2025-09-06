@@ -13,9 +13,16 @@ public class ProductServices
         _dataAccess = productDataAccess;
     }
 
-    public async Task<Product?> GetBySku(string sku){
+    public async Task<Product?> GetBySku(string sku)
+    {
         return await _dataAccess.GetBySku(sku);
     }
+
+    public async Task<List<Product>> GetProducts(int? page)
+    {
+        return await _dataAccess.GetList(page);
+    } 
+    
 
     
 
