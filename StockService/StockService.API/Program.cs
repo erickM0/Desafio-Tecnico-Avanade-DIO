@@ -35,6 +35,11 @@ app.MapGet("/products", async (ProductServices productServices) =>
     return Results.Ok(products);
 })
 .WithName("products");
+app.MapGet("/", () =>
+{
+    return Results.Ok("{ok}");
+})
+.WithName("home");
 
 app.Run();
 
