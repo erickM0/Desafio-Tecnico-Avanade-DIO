@@ -3,7 +3,7 @@ using StockService.Domain.Services;
 using StockService.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using StockService.Infra.DB.Repositories;
-
+using StockService.API.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,20 +26,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.MapProductEndpoints();
 
-
-
-app.MapGet("/products", async (ProductServices productServices) =>
-{
-    var products = await productServices.GetProducts(1);
-    return Results.Ok(products);
-})
-.WithName("products");
-app.MapGet("/", () =>
-{
-    return Results.Ok("{ok}");
-})
-.WithName("home");
 
 app.Run();
 
