@@ -21,8 +21,12 @@ public class ProductServices
     public async Task<List<Product>> GetProducts(int? page)
     {
         return await _dataAccess.GetList(page);
-    } 
-    
+    }
+
+    public async Task<bool> Create(Product product)
+    {
+        return await _dataAccess.Create(product);
+    }
 
     
 

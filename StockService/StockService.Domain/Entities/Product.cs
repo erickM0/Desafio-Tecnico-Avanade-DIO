@@ -11,7 +11,10 @@ public class Product : IAuditableModified
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; } = default;
     [Required]
+    [StringLength(50)]
     public required string Sku { get; set; }
+    [StringLength(500)]
+    public string? Description { get; set; } = default;
     [Required]
     [StringLength(200)]
     public required string Name { get; set; }
