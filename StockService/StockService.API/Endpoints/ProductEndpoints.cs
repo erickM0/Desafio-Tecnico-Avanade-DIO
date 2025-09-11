@@ -1,3 +1,4 @@
+using StockService.Domain.Services;
 using StockService.Domain.Entities;
 using StockService.API.DTOs;
 
@@ -20,7 +21,7 @@ public static class ProductEndpoints
             var products = await productServices.GetBySku(sku);
             return Results.Ok(products);
         })
-        .WithName("products");
+        .WithName("get product by sku");
 
         app.MapPost("/products", async (ProductDto productDto, ProductServices productServices) =>
         {
@@ -30,9 +31,10 @@ public static class ProductEndpoints
                 Name = productDto.Name,
                 Description = productDto.Description
             };
+            bool response = await productServices.Create(product);
 
-            return Result.OK(productServices.Create(product));
+            return Results.Ok(response);
         }).
-        WithName("products");
+        WithName("Create product");
     }
 }
