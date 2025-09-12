@@ -73,41 +73,64 @@ Desenvolver uma aplicação com arquitetura de microserviços para gerenciamento
 
 
 ### Contexto do Negócio
-A aplicação simula um sistema para uma plataforma de e-commerce, onde empresas precisam gerenciar seu estoque de produtos e realizar vendas de forma eficiente. A solução deve ser escalável e robusta, com separação clara entre as responsabilidades de estoque e vendas, utilizando boas práticas de arquitetura de microserviços. Esse tipo de sistema é comum em empresas que buscam flexibilidade e alta disponibilidade em ambientes com grande volume de transações. 
+<p>A aplicação simula um sistema para uma plataforma de e-commerce, onde empresas precisam gerenciar seu estoque de produtos e realizar vendas de forma eficiente. A solução deve ser escalável e robusta, com separação clara entre as responsabilidades de estoque e vendas, utilizando boas práticas de arquitetura de microserviços. Esse tipo de sistema é comum em empresas que buscam flexibilidade e alta disponibilidade em ambientes com grande volume de transações. </p>
 
 ### Requisitos Técnicos
-Tecnologia: .NET Core (C#) para construir as APIs. 
+<ul>
+    <li>
+        Tecnologia: .NET Core (C#) para construir as APIs. 
+    </li>
+    <li>
+        Banco de Dados: Usar Entity Framework com banco de dados relacional (SQL Server ou outro).
+    </li> 
+    <li>
+        Microserviços: 
+        <ul>
+            <li>
+                Microserviço de Gestão de Estoque deve permitir cadastrar produtos, consultar estoque e atualizar quantidades. 
+            </li>
+            <li>
+                Microserviço de Gestão de Vendas deve validar a disponibilidade de produtos, criar pedidos e reduzir o estoque. 
+            </li>
+            <li>
+                Comunicação entre Microserviços: Usar RabbitMQ para comunicação assíncrona entre os microserviços, especialmente para notificar mudanças de estoque após uma venda.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Autenticação: Implementar autenticação via JWT para proteger os endpoints e garantir que apenas usuários autorizados possam realizar ações. 
+    </li>
+    <li>
+        API Gateway: Usar um API Gateway para redirecionar as requisições de clientes para os microserviços corretos. 
+    </li>
+    <li>
+        Boas Práticas: Seguir boas práticas de design de API, como a utilização de RESTful APIs, tratamento adequado de exceções e validações de entrada. 
+    </li>
+</ul>
 
-Banco de Dados: Usar Entity Framework com banco de dados relacional (SQL Server ou outro). 
+### Critérios de Aceitação
+<ul>
+    <li>
+        O sistema deve permitir o cadastro de produtos no microserviço de estoque. 
+    </li>
+    <li>
+        O sistema deve permitir a criação de pedidos no microserviço de vendas, com validação de estoque antes de confirmar o pedido. 
+    </li>
+    <li>
+        A comunicação entre os microserviços deve ser feita de forma eficiente usando RabbitMQ para notificações de vendas e atualizações de estoque. 
+    </li>
+    <li>
+        O sistema deve ter uma API Gateway que direcione as requisições para os microserviços corretos. 
+    </li>
+    <li>
+        O sistema deve ser seguro, com autenticação via JWT para usuários e permissões específicas para cada ação. 
+    </li>
+    <li>
+        O código deve ser bem estruturado, com separação de responsabilidades e boas práticas de POO. 
+    </li>
+</ul>
 
-Microserviços: 
-
-Microserviço de Gestão de Estoque deve permitir cadastrar produtos, consultar estoque e atualizar quantidades. 
-
-Microserviço de Gestão de Vendas deve validar a disponibilidade de produtos, criar pedidos e reduzir o estoque. 
-
-Comunicação entre Microserviços: Usar RabbitMQ para comunicação assíncrona entre os microserviços, especialmente para notificar mudanças de estoque após uma venda. 
-
-Autenticação: Implementar autenticação via JWT para proteger os endpoints e garantir que apenas usuários autorizados possam realizar ações. 
-
-API Gateway: Usar um API Gateway para redirecionar as requisições de clientes para os microserviços corretos. 
-
-Boas Práticas: Seguir boas práticas de design de API, como a utilização de RESTful APIs, tratamento adequado de exceções e validações de entrada. 
-
-Critérios de Aceitação
-O sistema deve permitir o cadastro de produtos no microserviço de estoque. 
-
-O sistema deve permitir a criação de pedidos no microserviço de vendas, com validação de estoque antes de confirmar o pedido. 
-
-A comunicação entre os microserviços deve ser feita de forma eficiente usando RabbitMQ para notificações de vendas e atualizações de estoque. 
-
-O sistema deve ter uma API Gateway que direcione as requisições para os microserviços corretos. 
-
-O sistema deve ser seguro, com autenticação via JWT para usuários e permissões específicas para cada ação. 
-
-O código deve ser bem estruturado, com separação de responsabilidades e boas práticas de POO. 
-
-Extras
+### Extras
 Testes Unitários: Criar testes unitários para as funcionalidades principais, como cadastro de produtos e criação de pedidos. 
 
 Monitoramento e Logs: Implementar monitoramento básico de logs para rastrear falhas e transações no sistema. 
