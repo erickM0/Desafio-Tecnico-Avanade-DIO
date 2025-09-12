@@ -137,3 +137,19 @@ Monitoramento e Logs: Implementar monitoramento básico de logs para rastrear fa
 
 Escalabilidade: O sistema deve ser capaz de escalar facilmente, caso seja necessário adicionar mais microserviços (ex: microserviço de pagamento ou de envio). 
 
+## Rresolução
+
+Para a resolução desse desafio, inicialmente consultei a documentação de outro projeto, desenvolvido com Minimal Api em .NET, também da DIO. Embora a versão utilizada no projeto seja anterior, e o padrão de arquitetura usado no projeto seja diferente. Como nunca tinha tentado criar um projeto com micro serviços, esse modelo serviu como base para a criação dos serviços.
+
+Como é minh primeira aplicção com micro serviços, realisei pesquisas em artigos indicados no forum e em outros canais, como na FreeCodeCamp e na documentação da Microsoft. Alem disso discuti abordagens, estrutura de pastas e questões de segurança com IAs generativas. Como Gemini e Chat GPT. Com isso decidi que uma abordagem interessante para iniciar seria criando primeiro as entidades, começando com os diagramas dos bancos de dados. 
+
+### Passos Realizados
+
+Criação da Solution
+Criação ds pastas dos servicos
+Divisão dos serviços em 3 projetos(libs de classes): Domain, API e Infra
+
+Serviço
+
+
+
