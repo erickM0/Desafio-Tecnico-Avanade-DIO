@@ -9,13 +9,13 @@ services:
     ports:
       ["8080:8080"]
     environment:
-      ConnectionStrings__SqlServer: "Server=db-sqlserver;Database=StockServiceDB;User Id=SA;Password=${STOCK_SERVICE_DB_PASSWORD};Encrypt=True;TrustServerCertificate=True;"
+      ConnectionStrings__SqlServer: "Server=db-sqlserver;Database=StockServiceDB;User Id=${STOCK_SERVICE_DB_USER};Password=${STOCK_SERVICE_DB_PASSWORD};Encrypt=True;TrustServerCertificate=True;"
     depends_on:
       - db-sqlserver
   
   #banco de dados do serviço de estoque
   db-sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2025-latest
     container_name: StockServiceDB
     ports:
      ["1433:1433"]
