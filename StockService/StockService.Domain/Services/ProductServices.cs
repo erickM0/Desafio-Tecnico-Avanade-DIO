@@ -1,5 +1,6 @@
 using StockService.Domain.Entities;
 using StockService.Domain.Interfaces;
+using System.Linq;
 
 namespace StockService.Domain.Services;
 

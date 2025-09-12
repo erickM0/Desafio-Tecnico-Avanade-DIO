@@ -18,6 +18,7 @@ public class Product : IAuditableModified
     [Required]
     [StringLength(200)]
     public required string Name { get; set; }
+    public double Price { get; set; } = 0;
     [Required]
     [Column(TypeName = "bit")]
     private bool Active { get; set; } = true;
