@@ -1,6 +1,7 @@
 using StockService.Domain.Services;
 using StockService.Domain.Entities;
 using StockService.API.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StockService.API.Endpoints;
 
@@ -8,28 +9,30 @@ public static class ProductEndpoints
 {
     public static void MapProductEndpoints(this WebApplication app)
     {
-        app.MapGet("/products", async (int? page, ProductServices productServices) =>
+        app.MapGet("/products", async ([FromQuery]int? page, [FromServices]ProductServices productServices) =>
         {
             int pagination = page ?? 1;
-            var products = await productServices.GetProducts(pagination);
-            return Results.Ok(products);
+            List<Product> products = await productServices.GetProducts(pagination);
+            var productDtoList = products.Select(p => new ProductDto
+            {
+                Name = p.Name,
+                Price = p.Price,
+                Sku = p.Sku,
+                Description = p.Description,
+            }).ToList();
+            return Results.Ok(productDtoList);
         })
         .WithName("products");
 
-        app.MapGet("/products/{sku}", async (string sku, ProductServices productServices) =>
-        {
-            var products = await productServices.GetBySku(sku);
-            return Results.Ok(products);
-        })
-        .WithName("get product by sku");
 
-        app.MapPost("/products", async (ProductDto productDto, ProductServices productServices) =>
+        app.MapPost("/products", async ([FromBody]ProductDto productDto, [FromServices]ProductServices productServices) =>
         {
             var product = new Product
             {
                 Sku = productDto.Sku,
                 Name = productDto.Name,
-                Description = productDto.Description
+                Description = productDto.Description,
+                Price = productDto.Price,
             };
             bool response = await productServices.Create(product);
 

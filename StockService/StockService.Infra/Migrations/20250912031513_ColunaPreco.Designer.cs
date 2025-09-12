@@ -12,8 +12,8 @@ using StockService.Infra.DB;
 namespace StockService.Infra.Migrations
 {
     [DbContext(typeof(StockDbContext))]
-    [Migration("20250910215821_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250912031513_ColunaPreco")]
+    partial class ColunaPreco
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,9 @@ namespace StockService.Infra.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("Sku")
                         .IsRequired()

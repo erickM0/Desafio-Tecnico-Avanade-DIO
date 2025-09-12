@@ -45,6 +45,9 @@ namespace StockService.Infra.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<string>("Sku")
                         .IsRequired()
                         .HasMaxLength(50)
